@@ -5,20 +5,14 @@
  */
 module.exports = {
 
-  production: {
-    client: 'postgresql',
+  development: {
+    client: 'pg',
     connection: {
-      database: 'dcpf5qd3fhfgho',
-      user:     'japimxmroxyqfj',
-      password: 'f6ddbe474fe2d4d079f79eaf4604fab2f9296672ed6436adf0bb6e0c76d49bd1'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
+      host: '127.0.0.1',
+      port: 5432,
+      user: 'postgres',
+      password: 'qwerty',
+      database: 'practicaknex'
     }
   }
-
 };

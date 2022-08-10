@@ -2,12 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 let cors = require("cors");
-      app.use(cors());
+    app.use(cors());
+
+const newPokemonRouter = require('./routes/newPokemon');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use('/', newPokemonRouter);
+
 
 
 
@@ -16,8 +21,6 @@ app.get('/', (req, resp)=>{
 })
 
 
-
-app.listen((process.env.PORT || 4002)
-, ()=>{
-    console.log("Server on")
+app.listen(4000, () => {
+    console.log("Servidor levantado")
 })
