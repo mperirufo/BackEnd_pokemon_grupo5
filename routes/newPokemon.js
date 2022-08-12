@@ -14,5 +14,16 @@ router.get('/', async (req, resp) => {
     resp.json(pokemons);
 });
 
+router.get('/pokemon/:id', async (req, resp) => {
+    const id = req.params.id;
+    const onePokemon = await userQueries.getOnePokemon(id);
+    resp.json(onePokemon)
+})
+
+router.delete('/:id', async (req, resp) => {
+    const id = req.params.id;
+    const deletedPokemon = await userQueries.deleteItem(id);
+    resp.json(deletedPokemon);
+});
 
 module.exports = router;
