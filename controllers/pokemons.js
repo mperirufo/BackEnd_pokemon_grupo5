@@ -7,24 +7,26 @@ const createItem = (body) => {
         const pokemonConHabilidades = body.habilidades.map((habilidad) => ({
             pokemon_id: arrayPokemon[0].id, habilidades_id: habilidad.id
         }))
+        console.log(arrayPokemon)
         return pokemonConHabilidades
+        
     })
     .then((pokemonConHabilidades) => {
         console.log(pokemonConHabilidades)
         knex ('habilidades_pokemon')
         .insert(pokemonConHabilidades).then((res) => {console.log(res) } ) 
      } )
-    .then((arrayPokemon) => {
+     .then((arrayPokemon) => {
         const pokemonConMovimientos = body.movimientos.map((movimiento) => ({
             pokemon_id: arrayPokemon[0].id, movimientos_id: movimiento.id
         }))
         return pokemonConMovimientos
     })
-    .then((pokemonConMovimientos) => {
-        console.log(pokemonConMovimientos)
-        knex ('movimientos_pokemon')
-        .insert(pokemonConMovimientos).then((res) => {console.log(res) } ) 
-    })
+    // .then((pokemonConMovimientos) => {
+    //     console.log(pokemonConMovimientos)
+    //     knex ('movimientos_pokemon')
+    //     .insert(pokemonConMovimientos).then((res) => {console.log(res) } ) 
+    // })
     
     
 

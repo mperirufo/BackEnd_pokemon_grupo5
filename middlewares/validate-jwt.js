@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const SIGNATURE = 'TokenSenpaiParaToken'
+const SIGNATURE = 'TokenParaPokemon'
 
 const verifyToken = (req, res, next) => {
   const token = req.header('auth-token')
@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, SIGNATURE)
-    req.user = verified;
+    req.usuario = verified;
     next();
   } catch (error) {
     res.status(400).json({

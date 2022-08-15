@@ -24,15 +24,15 @@ router.post('/register', async(req, resp) => {
 })
 
 router.post('/login', async(req, resp) => {
-    const user = await userController.findUser(req.body.nombre);
+    const usuario = await userController.findUser(req.body.nombre);
   
-    if (!user) {
+    if (!usuario) {
       resp.json({
         error: "Usuario no creado"
       })
     }
   
-    const validPass = await bcrypt.compare(req.body.contrasena, usuarios.contrasena);
+    const validPass = await bcrypt.compare(req.body.contrasena, usuario.contrasena);
   
     if(!validPass) {
       return resp.json({
@@ -41,8 +41,8 @@ router.post('/login', async(req, resp) => {
     }
   
     const token = jwt.sign({
-      name: user.nombre,
-      id: user.id,
+      name: usuario.nombre,
+      id: usuario.id,
     }, SIGNATURE)
   
     resp.json({

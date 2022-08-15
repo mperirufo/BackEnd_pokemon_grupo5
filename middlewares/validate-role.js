@@ -3,8 +3,8 @@ const { SIGNATURE } = require("./validate-jwt")
 
 const validateRole = (req, resp, next) => {
   const token = req.header('auth-token')
-  const user = jwt.verify(token, SIGNATURE)
-  if (user.role === 1) {
+  const usuario = jwt.verify(token, SIGNATURE)
+  if (usuario.role === 1) {
     next()
   }
 
