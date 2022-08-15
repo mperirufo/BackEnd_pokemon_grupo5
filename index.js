@@ -5,6 +5,7 @@ let cors = require("cors");
     app.use(cors());
 
 const newPokemonRouter = require('./routes/newPokemon');
+const authRouter = require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/', newPokemonRouter);
+app.use('/auth', authRouter);
 
 
 

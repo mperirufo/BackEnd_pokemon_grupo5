@@ -2,20 +2,38 @@ const configDB = require('../knexfile');
 const knex = require('knex')(configDB.development);
 
 const createItem = (body) => {
-    return knex('pokemons')
-    .insert(body/*.pokemons*/)/*.returning('id').then((id) => {
+     return knex('pokemons')
+    .insert(body.pokemons).returning('id').then((arrayPokemon) => {
         const pokemonConHabilidades = body.habilidades.map((habilidad) => ({
-            pokemon_id: id, habilidades_id: habilidad.id
-        }
-        ));
-        knex('habilidades_pokemon')
-        .insert(pokemonConHabilidades)
-    })*/
+            pokemon_id: arrayPokemon[0].id, habilidades_id: habilidad.id
+        }))
+        return pokemonConHabilidades
+    })
+    .then((pokemonConHabilidades) => {
+        console.log(pokemonConHabilidades)
+        knex ('habilidades_pokemon')
+        .insert(pokemonConHabilidades).then((res) => {console.log(res) } ) 
+     } )
+    .then((arrayPokemon) => {
+        const pokemonConMovimientos = body.movimientos.map((movimiento) => ({
+            pokemon_id: arrayPokemon[0].id, movimientos_id: movimiento.id
+        }))
+        return pokemonConMovimientos
+    })
+    .then((pokemonConMovimientos) => {
+        console.log(pokemonConMovimientos)
+        knex ('movimientos_pokemon')
+        .insert(pokemonConMovimientos).then((res) => {console.log(res) } ) 
+    })
+    
+    
+
 }
+
 
 const getAllItems = () => {
     return knex
-    .column('id', 'name')
+    .column('id', 'nombre')
     .select()
     .from('pokemons')
 }
