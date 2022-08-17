@@ -27,7 +27,7 @@ router.post('/login', async(req, resp) => {
     const usuario = await userController.findUser(req.body.nombre);
   
     if (!usuario) {
-      resp.json({
+      resp.status(500).json({
         error: "Usuario no creado"
       })
     }

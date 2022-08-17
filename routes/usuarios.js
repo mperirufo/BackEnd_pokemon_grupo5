@@ -7,7 +7,7 @@ const router = express.Router();
 router.use('/', verifyToken);
 router.use('/', validateRole);
 
-router.get('/', (req, resp) => {
+router.get('/usuario', (req, resp) => {
   resp.send('home usuario')
 })
 
