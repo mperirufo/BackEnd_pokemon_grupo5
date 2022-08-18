@@ -31,6 +31,6 @@ router.put('/:id', async(req, resp) => {
     const body = req.body;
     const updatedUser = await userQueries.updateItem(id, body)
     resp.json(updatedUser);
-  });
+});
 
 module.exports = router;
