@@ -88,9 +88,16 @@ const deleteItem = (id) => {
     .del()
 }
 
+const updateItem = (id, body) => {
+    return knex('pokemons')
+      .where('id', id)
+      .update(body)
+  }
+
 module.exports = {
     createItem,
     getAllItems,
     deleteItem,
-    getOnePokemon
+    getOnePokemon,
+    updateItem
 }

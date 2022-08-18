@@ -1,22 +1,22 @@
 const express = require('express');
-const userQueries = require('../controllers/pokemons');
+const userQueries = require('../controllers/habiliades');
 const router = express.Router();
 
 
-router.post('/createpokemon', async(req, resp) => {
+router.post('/createhabilidades', async(req, resp) => {
     const body = req.body;
     const newPokemon = await userQueries.createItem(body);
     resp.json(newPokemon);
 });
 
-router.get('/getallpokemons', async (req, resp) => {
+router.get('/getallhabilidades', async (req, resp) => {
     const pokemons = await userQueries.getAllItems();
     resp.json(pokemons);
 });
 
-router.get('/pokemon/:id', async (req, resp) => {
+router.get('/habilidades/:id', async (req, resp) => {
     const id = req.params.id;
-    const onePokemon = await userQueries.getOnePokemon(id);
+    const onePokemon = await userQueries.getItemById(id);
     resp.json(onePokemon)
 })
 

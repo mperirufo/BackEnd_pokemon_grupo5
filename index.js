@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use('/', newPokemonRouter);
+app.use('/pokemons', newPokemonRouter);
 app.use('/auth', authRouter);
 app.use('/usuario', usuarioRouter);
 
