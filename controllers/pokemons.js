@@ -18,7 +18,7 @@ const createItem = async (body) => {
         knex ('habilidades_pokemon')
         .insert(pokemonConHabilidades).then((res) => {console.log(res) } ) 
     } )
-    const pokemonConTipo = body.tipos.map((tipos) => ({
+    const pokemonConTipo = body.tipo.map((tipos) => ({
         pokemon_id: pokemonId, tipo_id: tipos.id
     }))
     return knex('tipo_pokemon').insert(pokemonConTipo)
@@ -27,8 +27,7 @@ const createItem = async (body) => {
 
 const getAllItems = () => {
     return knex
-    .column('id', 'name')
-    .select()
+    .select('*')
     .from('pokemons')
 }
 
@@ -64,6 +63,9 @@ const getOnePokemon = async (id) =>{
         pokemonsTypes.map((type) => {
             pokemonFinal.types.push(type)
         })
+        })
+        .catch( (er) => {
+            return er
         })
         return pokemonFinal
 /*select p.name, h.nombre, t.nombre

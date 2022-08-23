@@ -11,13 +11,20 @@ router.post('/createhabilidades', async(req, resp) => {
 
 router.get('/getallhabilidades', async (req, resp) => {
     const pokemons = await userQueries.getAllItems();
-    resp.json(pokemons);
+    resp.json(pokemons)
+    .catch((er) => {
+        resp.json (er)
+    })
 });
 
 router.get('/habilidades/:id', async (req, resp) => {
     const id = req.params.id;
-    const onePokemon = await userQueries.getItemById(id);
-    resp.json(onePokemon)
+    const onePokemon = await userQueries.getItemById(id)
+    .then(
+    resp.json(onePokemon))
+    .catch((er) => {
+        resp.json (er)
+    })
 })
 
 router.delete('/:id', async (req, resp) => {

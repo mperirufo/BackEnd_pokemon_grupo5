@@ -16,8 +16,13 @@ router.get('/getallpokemons', async (req, resp) => {
 
 router.get('/pokemon/:id', async (req, resp) => {
     const id = req.params.id;
-    const onePokemon = await userQueries.getOnePokemon(id);
-    resp.json(onePokemon)
+    const onePokemon = await userQueries.getOnePokemon(id)
+    .then((onePokemon) => {
+     resp.json(onePokemon)
+    })
+    .catch((er) => {
+        resp.json (er)
+    })
 })
 
 router.delete('/:id', async (req, resp) => {
