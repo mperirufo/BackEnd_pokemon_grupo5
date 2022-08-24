@@ -31,6 +31,45 @@ const getAllItems = () => {
     .from('pokemons')
 }
 
+const getFirstPokemon = async () => {
+    let pokemonFinal = {datos_pokemon: {}, moves: [], types: []}
+    await knex.select('*')
+    .from('pokemons')
+    .first()
+    .then((arrayDePokemon) => {
+        console.log(arrayDePokemon);
+        return pokemonFinal['datos_pokemon'] = arrayDePokemon
+    })
+    await knex 
+    .select('habilidades.nombre')
+    .from('habilidades')
+    .innerJoin('habilidades_pokemon', 'habilidades.id', 'habilidades_pokemon.habilidades_id')
+    .innerJoin('pokemons', 'habilidades_pokemon.pokemon_id', 'pokemons.id')
+    .where('pokemons.id', pokemonFinal.datos_pokemon.id)
+    .then((pokemonsMoves) => {
+        pokemonsMoves.map((move) => {
+            pokemonFinal.moves.push(move)
+        })
+        return pokemonFinal
+    })
+    await knex
+    .select('tipo.nombre')
+    .from('tipo')
+    .innerJoin('tipo_pokemon', 'tipo.id', 'tipo_pokemon.tipo_id')
+    .innerJoin('pokemons', 'tipo_pokemon.pokemon_id', 'pokemons.id')
+    .where('pokemons.id', pokemonFinal.datos_pokemon.id)
+    .then((pokemonsTypes) => {
+        pokemonsTypes.map((type) => {
+            pokemonFinal.types.push(type)
+        })
+        return pokemonFinal
+    })
+    .catch ((er) => {
+        return (er);
+    })
+    return pokemonFinal
+}
+
 const getOnePokemon = async (id) =>{
         let pokemonFinal = {datos_pokemon:{}, moves:[], types:[]}
         await knex('pokemons')
@@ -101,5 +140,6 @@ module.exports = {
     getAllItems,
     deleteItem,
     getOnePokemon,
-    updateItem
+    updateItem,
+    getFirstPokemon,
 }

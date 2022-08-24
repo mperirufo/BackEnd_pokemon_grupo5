@@ -9,6 +9,7 @@ const getAllItems = () => {
     .from('habilidades')
 }
 
+
 const getItemById = (id) => {
     return knex('habilidades')
     .where('id',id)

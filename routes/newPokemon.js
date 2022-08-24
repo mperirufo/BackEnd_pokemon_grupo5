@@ -25,6 +25,11 @@ router.get('/pokemon/:id', async (req, resp) => {
     })
 })
 
+router.get('/firstpokemon', async (req, resp) => {
+    const pokemon = await userQueries.getFirstPokemon()
+    resp.json(pokemon)
+})
+
 router.delete('/:id', async (req, resp) => {
     const id = req.params.id;
     const deletedPokemon = await userQueries.deleteItem(id);
