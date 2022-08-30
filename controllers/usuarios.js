@@ -7,7 +7,8 @@ const createUser = (body) => {
 }
 
 const findUser = (nombre) => {
-  return knex('usuarios').where({nombre}).first()
+  console.log('nombre', nombre)
+  return knex('usuarios').where( 'nombre', nombre).first()
 }
 
 module.exports = {
