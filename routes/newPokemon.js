@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/createpokemon', async(req, resp) => {
     const body = req.body;
+    console.log(body);
     const newPokemon = await userQueries.createItem(body);
     resp.json(newPokemon);
 });
